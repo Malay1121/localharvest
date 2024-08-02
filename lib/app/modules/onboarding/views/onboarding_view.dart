@@ -70,7 +70,7 @@ class OnboardingView extends GetView<OnboardingController> {
                   children: [
                     CommonButton(
                       text: AppStrings.signUp,
-                      onTap: () {},
+                      onTap: () => Get.toNamed(Routes.SIGNUP),
                       height: 53,
                       width: 166,
                     ),

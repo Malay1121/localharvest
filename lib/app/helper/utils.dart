@@ -28,6 +28,17 @@ bool validatePassword(String password) {
       .hasMatch(password);
 }
 
+bool validatePhone(String phone) {
+  String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+  RegExp regExp = new RegExp(patttern);
+  if (isEmptyString(phone)) {
+    return false;
+  } else if (!regExp.hasMatch(phone)) {
+    return false;
+  }
+  return true;
+}
+
 bool isEmptyString(String? string) {
   if (string == null || string.isEmpty) {
     return true;
@@ -64,6 +75,10 @@ void writeUserDetails(Map<String, dynamic> data) {
 
 Map<String, dynamic>? readUserDetails() {
   return getStorage.read("userDetails");
+}
+
+showSnackbar({String? title, String? message}) {
+  Get.snackbar(title ?? 'medguard', message ?? '');
 }
 
 Future textToSpeech(String text) async {
@@ -132,6 +147,10 @@ String getMessageFromErrorCode(e) {
       return "Login failed. Please try again.";
       break;
   }
+}
+
+void showFirebaseError(error) {
+  Get.snackbar(AppStrings.appName, error);
 }
 
 run(VoidCallback task) async {
