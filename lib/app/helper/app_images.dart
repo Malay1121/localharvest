@@ -5,4 +5,7 @@ class AppImages {
   static String svgsDirectory = 'assets/svgs/';
 
   static String logo = "assets/images/logo.png";
+  static String transparentLogo = "assets/images/transparent_logo.png";
+  static String onboardingBackground =
+      "assets/images/onboarding_background.png";
 }

@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
 import 'package:local_harvest/app/widgets/common_controller.dart';
 
-class HomeController extends CommonController {
-  //TODO: Implement HomeController
-
-  final count = 0.obs;
+class OnboardingController extends CommonController {
   @override
   void onInit() {
     super.onInit();
@@ -19,6 +16,4 @@ class HomeController extends CommonController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

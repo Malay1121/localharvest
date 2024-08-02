@@ -1,8 +1,7 @@
 import 'all_imports.dart';
 
 class AppColors {
-  static Color appColor = Color(0xFF00000);
-  static Color white = Color(0xFF00000);
+  static Color white = Color(0xFFFFFFFF);
   static Color primary = Color(0xFF23AA49);
   static Color secondary = Color(0xFFFF324B);
   static Color stroke = Color(0xFFF1F1F5);
