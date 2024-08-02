@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "997946243567",
+    "project_id": "localharvest-app",
+    "storage_bucket": "localharvest-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997946243567:android:4a08571efe1f70ca915e1a",
+        "android_client_info": {
+          "package_name": "com.malay.localharvest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIoyqYGRZRiBiHiag8BBvTJ3GbzoqPoCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
