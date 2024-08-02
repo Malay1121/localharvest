@@ -1,3 +1,5 @@
+import 'package:speech_to_text/speech_to_text.dart';
+
 import 'all_imports.dart';
 import 'package:intl/intl.dart';
 
@@ -160,4 +162,16 @@ run(VoidCallback task) async {
       ),
     );
   }
+}
+
+bool listening = false;
+SpeechToText speechToText = SpeechToText();
+bool speechEnabled = false;
+
+void initializeSpeech() async {
+  speechEnabled = await speechToText.initialize(
+    onError: (errorNotification) {
+      listening = false;
+    },
+  );
 }

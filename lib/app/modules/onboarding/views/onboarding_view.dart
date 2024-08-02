@@ -69,7 +69,7 @@ class OnboardingView extends GetView<OnboardingController> {
                 Row(
                   children: [
                     CommonButton(
-                      text: AppStrings.consumer,
+                      text: AppStrings.signUp,
                       onTap: () {},
                       height: 53,
                       width: 166,
@@ -78,13 +78,16 @@ class OnboardingView extends GetView<OnboardingController> {
                       width: 10.w(context),
                     ),
                     CommonButton(
-                      text: AppStrings.farmer,
+                      text: AppStrings.logIn,
                       backgroundColor: Colors.transparent,
                       textColor: AppColors.primary,
-                      onTap: () {},
+                      onTap: () => Get.toNamed(Routes.LOGIN),
                       height: 53,
                       width: 166,
-                      border: Border.all(color: AppColors.primary, width: 2),
+                      border: Border.all(
+                        color: AppColors.primary,
+                        width: 2,
+                      ),
                     ),
                   ],
                 ),

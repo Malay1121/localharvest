@@ -26,7 +26,7 @@ class CommonButton extends StatefulWidget {
 class _CommonButtonState extends State<CommonButton> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: widget.onTap,
       child: Container(
         height: widget.height.h(context),

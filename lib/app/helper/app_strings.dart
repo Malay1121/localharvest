@@ -8,6 +8,14 @@ class AppStrings {
       supportYourLocalFarmersCutOutTheMiddleManGettingTheFarmerYourselfABetterDeal =
       "Support your local farmers & cut out the middle man, getting the farmer & yourself a better deal!";
 
+  static String signUp = "Sign Up";
+  static String logIn = "Log In";
+  static String username = "Username";
+  static String emailAddress = "Email Address";
+  static String phoneNumber = "Phone Number";
+  static String password = "Password";
+  static String autoFillBySpeech = "Auto-Fill details by speech";
+  static String dontHaveAnAccount = "Don't have an account?";
   static String consumer = "Consumer";
   static String farmer = "Farmer";
 }

@@ -15,6 +15,7 @@ class CommonTextField extends StatefulWidget {
     this.obscureText = false,
     this.textInputAction,
     this.maxLines = 1,
+    this.prefixIconConstraints,
   });
   String hintText;
   double? width;
@@ -25,30 +26,17 @@ class CommonTextField extends StatefulWidget {
   TextInputType? keyboardType;
   TextInputAction? textInputAction;
   int? maxLines;
+  BoxConstraints? prefixIconConstraints;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
 }
 
 class _CommonTextFieldState extends State<CommonTextField> {
-  bool listening = false;
-  SpeechToText speechToText = SpeechToText();
-  bool speechEnabled = false;
-
   void speak() {
     if (!listening) {
       getText();
     }
-  }
-
-  void initializeSpeech() async {
-    speechEnabled = await speechToText.initialize(
-      onError: (errorNotification) {
-        setState(() {
-          listening = false;
-        });
-      },
-    );
   }
 
   Future<String> getText() async {
@@ -90,6 +78,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         maxLines: widget.maxLines,
         textInputAction: widget.textInputAction,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.zero,
           fillColor: AppColors.white,
           filled: true,
           hintText: widget.hintText,
@@ -102,8 +91,9 @@ class _CommonTextFieldState extends State<CommonTextField> {
             ),
           ),
           hintStyle: Styles.medium(
-            color: AppColors.fontDark,
+            color: AppColors.fontGrey,
           ),
+          prefixIconConstraints: widget.prefixIconConstraints,
           prefixIcon: widget.prefixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
