@@ -1,3 +1,4 @@
+import 'package:flutter_animator/flutter_animator.dart';
 import 'package:local_harvest/app/helper/all_imports.dart';
 
 import '../controllers/login_controller.dart';
@@ -21,11 +22,13 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 64.h(context),
                   ),
-                  Image.asset(
-                    AppImages.transparentLogo,
-                    width: 100.w(context),
-                    height: 100.h(context),
-                    fit: BoxFit.fitHeight,
+                  SlideInLeft(
+                    child: Image.asset(
+                      AppImages.transparentLogo,
+                      width: 100.w(context),
+                      height: 100.h(context),
+                      fit: BoxFit.fitHeight,
+                    ),
                   ),
                   SizedBox(
                     height: 24.h(context),
@@ -132,16 +135,18 @@ class LoginView extends GetView<LoginController> {
                   SizedBox(
                     height: 48.h(context),
                   ),
-                  CommonButton(
-                    text: AppStrings.autoFillBySpeech,
-                    onTap: () => Routes.LOGIN,
-                    height: 50,
-                    width: 342,
-                    backgroundColor: Colors.transparent,
-                    textColor: AppColors.primary,
-                    border: Border.all(
-                      color: AppColors.primary,
-                      width: 2,
+                  Pulse(
+                    child: CommonButton(
+                      text: AppStrings.autoFillBySpeech,
+                      onTap: () => Routes.LOGIN,
+                      height: 50,
+                      width: 342,
+                      backgroundColor: Colors.transparent,
+                      textColor: AppColors.primary,
+                      border: Border.all(
+                        color: AppColors.primary,
+                        width: 2,
+                      ),
                     ),
                   ),
                   SizedBox(

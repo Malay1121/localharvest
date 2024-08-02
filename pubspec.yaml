@@ -30,6 +30,7 @@ dependencies:
   flutter: 
     sdk: flutter
   flutter_native_splash: ^2.4.1
+  flutter_animator: ^3.2.2
 
 dev_dependencies: 
   flutter_lints: 4.0.0

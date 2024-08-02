@@ -1,3 +1,4 @@
+import 'package:flutter_animator/flutter_animator.dart';
 import 'package:local_harvest/app/helper/all_imports.dart';
 import 'package:local_harvest/app/widgets/common_button.dart';
 import 'package:local_harvest/app/widgets/common_text.dart';
@@ -27,11 +28,13 @@ class OnboardingView extends GetView<OnboardingController> {
                 SizedBox(
                   height: 64.h(context),
                 ),
-                Image.asset(
-                  AppImages.transparentLogo,
-                  width: 100.w(context),
-                  height: 100.h(context),
-                  fit: BoxFit.fitHeight,
+                SlideInLeft(
+                  child: Image.asset(
+                    AppImages.transparentLogo,
+                    width: 100.w(context),
+                    height: 100.h(context),
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
                 SizedBox(
                   height: 24.h(context),
@@ -68,25 +71,29 @@ class OnboardingView extends GetView<OnboardingController> {
                 ),
                 Row(
                   children: [
-                    CommonButton(
-                      text: AppStrings.signUp,
-                      onTap: () => Get.toNamed(Routes.SIGNUP),
-                      height: 53,
-                      width: 166,
+                    SlideInLeft(
+                      child: CommonButton(
+                        text: AppStrings.signUp,
+                        onTap: () => Get.toNamed(Routes.SIGNUP),
+                        height: 53,
+                        width: 166,
+                      ),
                     ),
                     SizedBox(
                       width: 10.w(context),
                     ),
-                    CommonButton(
-                      text: AppStrings.logIn,
-                      backgroundColor: Colors.transparent,
-                      textColor: AppColors.primary,
-                      onTap: () => Get.toNamed(Routes.LOGIN),
-                      height: 53,
-                      width: 166,
-                      border: Border.all(
-                        color: AppColors.primary,
-                        width: 2,
+                    SlideInRight(
+                      child: CommonButton(
+                        text: AppStrings.logIn,
+                        backgroundColor: Colors.transparent,
+                        textColor: AppColors.primary,
+                        onTap: () => Get.toNamed(Routes.LOGIN),
+                        height: 53,
+                        width: 166,
+                        border: Border.all(
+                          color: AppColors.primary,
+                          width: 2,
+                        ),
                       ),
                     ),
                   ],
