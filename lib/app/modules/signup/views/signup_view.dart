@@ -1,13 +1,13 @@
 import 'package:local_harvest/app/helper/all_imports.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/signup_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  const SignupView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LoginController>(
-      init: LoginController(),
+    return GetBuilder<SignupController>(
+      init: SignupController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.white,
@@ -30,7 +30,7 @@ class LoginView extends GetView<LoginController> {
                   height: 24.h(context),
                 ),
                 AppText(
-                  text: AppStrings.logIn,
+                  text: AppStrings.signUp,
                   maxLines: null,
                   centered: true,
                   width: 318.w(context),
@@ -90,6 +90,24 @@ class LoginView extends GetView<LoginController> {
                   height: 32.h(context),
                 ),
                 CommonTextField(
+                  hintText: AppStrings.username,
+                  prefixIcon: Center(
+                    child: SvgPicture.asset(
+                      AppImages.icProfile,
+                      color: AppColors.primary,
+                      width: 24.w(context),
+                      height: 24.h(context),
+                    ),
+                  ),
+                  prefixIconConstraints: BoxConstraints(
+                    maxWidth: 32.w(context),
+                    maxHeight: 24.h(context),
+                  ),
+                ),
+                SizedBox(
+                  height: 16.h(context),
+                ),
+                CommonTextField(
                   hintText: AppStrings.emailAddress,
                   prefixIcon: Center(
                     child: SvgPicture.asset(
@@ -105,7 +123,25 @@ class LoginView extends GetView<LoginController> {
                   ),
                 ),
                 SizedBox(
-                  height: 40.h(context),
+                  height: 16.h(context),
+                ),
+                CommonTextField(
+                  hintText: AppStrings.phoneNumber,
+                  prefixIcon: Center(
+                    child: SvgPicture.asset(
+                      AppImages.icPhone,
+                      color: AppColors.primary,
+                      width: 24.w(context),
+                      height: 24.h(context),
+                    ),
+                  ),
+                  prefixIconConstraints: BoxConstraints(
+                    maxWidth: 32.w(context),
+                    maxHeight: 24.h(context),
+                  ),
+                ),
+                SizedBox(
+                  height: 16.h(context),
                 ),
                 CommonTextField(
                   hintText: AppStrings.password,
@@ -141,7 +177,7 @@ class LoginView extends GetView<LoginController> {
                   height: 16.h(context),
                 ),
                 CommonButton(
-                  text: AppStrings.logIn,
+                  text: AppStrings.signUp,
                   onTap: () => Routes.LOGIN,
                   height: 50,
                   width: 342,
@@ -153,16 +189,16 @@ class LoginView extends GetView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppText(
-                      text: "${AppStrings.dontHaveAnAccount} ",
+                      text: "${AppStrings.alreadyHaveAnAccount} ",
                       style: Styles.medium(
                         color: AppColors.fontDark,
                         fontSize: 16.t(context),
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => Get.offAndToNamed(Routes.SIGNUP),
+                      onTap: () => Get.offAndToNamed(Routes.LOGIN),
                       child: AppText(
-                        text: AppStrings.signUp,
+                        text: AppStrings.logIn,
                         style: Styles.medium(
                             color: AppColors.primary, fontSize: 16.t(context)),
                       ),

@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_responsive_helper/flutter_responsive_helper.dart';
-
-import 'package:get/get.dart';
-
-import 'app/routes/app_pages.dart';
+import 'app/helper/all_imports.dart';
 
 void main() {
   initializeSize(390, 844);
+  initializeSpeech();
   runApp(
     GetMaterialApp(
       title: "Application",

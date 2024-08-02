@@ -62,8 +62,6 @@ class _CommonTextFieldState extends State<CommonTextField> {
   @override
   void initState() {
     super.initState();
-    // TODO: implement initState
-    initializeSpeech();
   }
 
   @override

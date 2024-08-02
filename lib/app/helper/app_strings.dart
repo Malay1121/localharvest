@@ -14,8 +14,9 @@ class AppStrings {
   static String emailAddress = "Email Address";
   static String phoneNumber = "Phone Number";
   static String password = "Password";
-  static String autoFillBySpeech = "Auto-Fill details by speech";
+  static String autoFillBySpeech = "Auto-fill details by speech";
   static String dontHaveAnAccount = "Don't have an account?";
+  static String alreadyHaveAnAccount = "Already have an account?";
   static String consumer = "Consumer";
   static String farmer = "Farmer";
 }
