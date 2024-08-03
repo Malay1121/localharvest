@@ -78,10 +78,13 @@ class CommonController extends GetxController {
     );
   }
 
+  Map userDetails = {};
+
   @override
   void onInit() {
     // print('loll');
     // checkInternetConnection();
+    userDetails = readUserDetails() ?? {};
 
     super.onInit();
   }

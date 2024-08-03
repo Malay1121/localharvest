@@ -10,6 +10,8 @@ class AppImages {
   static String icPhone = "${svgsDirectory}ic_phone.svg";
   static String icAdd = "${svgsDirectory}ic_add.svg";
   static String icSearch = "${svgsDirectory}ic_search.svg";
+  static String icEdit = "${svgsDirectory}ic_edit.svg";
+  static String icPlant = "${svgsDirectory}ic_plant.svg";
 
   static String icExperience = "${imagesDirectory}ic_experience.png";
   static String icOrganic = "${imagesDirectory}ic_organic.png";

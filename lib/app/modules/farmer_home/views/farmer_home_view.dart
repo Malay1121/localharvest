@@ -104,7 +104,9 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                         children: [
                           CommonButton(
                             text: AppStrings.newProduct,
-                            onTap: () => null,
+                            onTap: () => Get.toNamed(
+                              Routes.ADD_PRODUCT,
+                            ),
                             width: 150.w(context),
                             height: 40.h(context),
                           ),
@@ -160,6 +162,7 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                                     quantity: double.parse(
                                         (product["quantity"] ?? 1).toString()),
                                     data: product,
+                                    edit: true,
                                   ),
                               ],
                             )

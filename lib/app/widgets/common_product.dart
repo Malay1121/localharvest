@@ -1,17 +1,19 @@
 import 'package:local_harvest/app/helper/all_imports.dart';
 
 class CommonProduct extends StatefulWidget {
-  CommonProduct(
-      {super.key,
-      required this.id,
-      required this.farmerFirstName,
-      required this.farmerLastName,
-      required this.farmerImage,
-      required this.productName,
-      required this.image,
-      required this.price,
-      required this.quantity,
-      this.data});
+  CommonProduct({
+    super.key,
+    required this.id,
+    required this.farmerFirstName,
+    required this.farmerLastName,
+    required this.farmerImage,
+    required this.productName,
+    required this.image,
+    required this.price,
+    required this.quantity,
+    this.data,
+    this.edit = false,
+  });
   String id;
   String image;
   String productName;
@@ -21,6 +23,7 @@ class CommonProduct extends StatefulWidget {
   double quantity;
   String farmerImage;
   Map? data;
+  bool edit;
   @override
   State<CommonProduct> createState() => _CommonProductState();
 }
@@ -127,7 +130,7 @@ class _CommonProductState extends State<CommonProduct> {
                         vertical: 10.h(context),
                       ),
                       child: SvgPicture.asset(
-                        AppImages.icAdd,
+                        widget.edit ? AppImages.icEdit : AppImages.icAdd,
                         width: 16.w(context),
                         height: 16.h(context),
                         color: AppColors.white,

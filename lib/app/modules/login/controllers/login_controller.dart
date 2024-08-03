@@ -25,7 +25,9 @@ class LoginController extends GetxController {
       UserCredential? result =
           await DatabaseHelper.loginUser(data: userDetails);
       if (result != null) {
-        Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(userDetails["userType"] == AppStrings.farmer
+            ? Routes.FARMER_HOME
+            : Routes.HOME);
       }
       EasyLoading.dismiss();
     }

@@ -52,4 +52,10 @@ class AppStrings {
   static String addToCart = "Add To Cart";
 
   static String newProduct = "New Product";
+  static String addProduct = "Add Product";
+  static String productImage = "Product Image";
+  static String productName = "Product Name";
+  static String productDescription = "Product Description";
+  static String productPrice = "Product Price";
+  static String productQuantity = "Product Quantity";
 }

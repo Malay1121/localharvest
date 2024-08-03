@@ -11,6 +11,7 @@ abstract class Routes {
   static const PRODUCT = _Paths.PRODUCT;
   static const FARMER_INFO = _Paths.FARMER_INFO;
   static const FARMER_HOME = _Paths.FARMER_HOME;
+  static const ADD_PRODUCT = _Paths.ADD_PRODUCT;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const PRODUCT = '/product';
   static const FARMER_INFO = '/farmer-info';
   static const FARMER_HOME = '/farmer-home';
+  static const ADD_PRODUCT = '/add-product';
 }

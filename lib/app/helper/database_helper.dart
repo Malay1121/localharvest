@@ -107,4 +107,25 @@ class DatabaseHelper {
     }
     return {};
   }
+
+  static Future createProduct({required Map<String, dynamic> data}) async {
+    try {
+      Map<String, dynamic> userDetails = await readUserDetails() ?? {};
+      String type = (data["image"] as File).path.split(".").last;
+      String productImage = await uploadFile(
+          path:
+              "products/${userDetails["uid"]}${DateTime.now().toUtc().millisecondsSinceEpoch}.${type}",
+          file: data["image"]);
+      data["image"] = productImage;
+      DocumentReference doc =
+          await FirebaseFirestore.instance.collection("products").add(data);
+      await FirebaseFirestore.instance
+          .collection("products")
+          .doc(doc.id)
+          .update({"id": doc.id});
+      return true;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+  }
 }

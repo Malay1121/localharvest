@@ -3,7 +3,6 @@ import 'package:local_harvest/app/helper/all_imports.dart';
 import 'package:local_harvest/app/widgets/common_controller.dart';
 
 class HomeController extends CommonController {
-  Map<String, dynamic> userDetails = {};
   List<Map> products = [];
 
   void getProducts() async {
@@ -14,7 +13,6 @@ class HomeController extends CommonController {
   @override
   void onInit() {
     super.onInit();
-    userDetails = readUserDetails() ?? {};
     getProducts();
   }
 
