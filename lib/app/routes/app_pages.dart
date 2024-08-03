@@ -6,6 +6,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
 import '../modules/onboarding/views/onboarding_view.dart';
+import '../modules/product/bindings/product_binding.dart';
+import '../modules/product/views/product_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRODUCT,
+      page: () => const ProductView(),
+      binding: ProductBinding(),
     ),
   ];
 }

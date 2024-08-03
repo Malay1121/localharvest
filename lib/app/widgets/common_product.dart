@@ -10,7 +10,8 @@ class CommonProduct extends StatefulWidget {
       required this.productName,
       required this.image,
       required this.price,
-      required this.quantity});
+      required this.quantity,
+      this.data});
   String id;
   String image;
   String productName;
@@ -19,6 +20,7 @@ class CommonProduct extends StatefulWidget {
   double price;
   double quantity;
   String farmerImage;
+  Map? data;
   @override
   State<CommonProduct> createState() => _CommonProductState();
 }
@@ -26,107 +28,116 @@ class CommonProduct extends StatefulWidget {
 class _CommonProductState extends State<CommonProduct> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 163.w(context),
-      decoration: BoxDecoration(
-        color: AppColors.lightBG,
-        borderRadius: BorderRadius.circular(16),
+    return GestureDetector(
+      onTap: () => Get.toNamed(
+        Routes.PRODUCT,
+        arguments: {
+          "productId": widget.id,
+          "data": widget.data,
+        },
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w(context),
-          vertical: 24.h(context),
+      child: Container(
+        width: 163.w(context),
+        decoration: BoxDecoration(
+          color: AppColors.lightBG,
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 20.w(context),
-                  height: 20.h(context),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        widget.farmerImage,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 24.w(context),
+            vertical: 24.h(context),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 20.w(context),
+                    height: 20.h(context),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          widget.farmerImage,
+                        ),
+                        fit: BoxFit.fill,
                       ),
-                      fit: BoxFit.fill,
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 4.w(context),
-                ),
-                AppText(
-                  text: "${widget.farmerFirstName} ${widget.farmerLastName}",
-                  style: Styles.bold(
-                    color: AppColors.fontGrey,
-                    fontSize: 12.t(context),
+                  SizedBox(
+                    width: 4.w(context),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 4.h(context),
-            ),
-            Container(
-              width: 115.w(context),
-              height: 115.h(context),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    widget.image,
+                  AppText(
+                    text: "${widget.farmerFirstName} ${widget.farmerLastName}",
+                    style: Styles.bold(
+                      color: AppColors.fontGrey,
+                      fontSize: 12.t(context),
+                    ),
                   ),
-                  fit: BoxFit.cover,
+                ],
+              ),
+              SizedBox(
+                height: 4.h(context),
+              ),
+              Container(
+                width: 115.w(context),
+                height: 115.h(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      widget.image,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 8.h(context)),
-            AppText(
-              text: "${widget.farmerFirstName}’s ${widget.productName}",
-              style: Styles.bold(
-                color: AppColors.fontDark,
-                fontSize: 14.t(context),
+              SizedBox(height: 8.h(context)),
+              AppText(
+                text: "${widget.farmerFirstName}’s ${widget.productName}",
+                style: Styles.bold(
+                  color: AppColors.fontDark,
+                  fontSize: 14.t(context),
+                ),
               ),
-            ),
-            SizedBox(height: 2.h(context)),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppText(
-                  text: "${widget.quantity} kg, ${widget.price}\$",
-                  style: Styles.bold(
-                    color: AppColors.secondary,
-                    fontSize: 14.t(context),
-                  ),
-                  width: 75.w(context),
-                ),
-                Spacer(),
-                Container(
-                  width: 36.w(context),
-                  height: 36.h(context),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.primary,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.w(context),
-                      vertical: 10.h(context),
+              SizedBox(height: 2.h(context)),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppText(
+                    text: "${widget.quantity} kg, ${widget.price}\$",
+                    style: Styles.bold(
+                      color: AppColors.secondary,
+                      fontSize: 14.t(context),
                     ),
-                    child: SvgPicture.asset(
-                      AppImages.icAdd,
-                      width: 16.w(context),
-                      height: 16.h(context),
-                      color: AppColors.white,
+                    width: 75.w(context),
+                  ),
+                  Spacer(),
+                  Container(
+                    width: 36.w(context),
+                    height: 36.h(context),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primary,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w(context),
+                        vertical: 10.h(context),
+                      ),
+                      child: SvgPicture.asset(
+                        AppImages.icAdd,
+                        width: 16.w(context),
+                        height: 16.h(context),
+                        color: AppColors.white,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

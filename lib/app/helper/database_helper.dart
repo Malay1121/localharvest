@@ -85,4 +85,22 @@ class DatabaseHelper {
     }
     return [];
   }
+
+  static Future<Map> getProduct({required String id}) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance.collection("products").doc(id).get();
+      Map docData = querySnapshot.data() ?? {};
+      DocumentSnapshot<Map<String, dynamic>> farmerSnapshot =
+          await FirebaseFirestore.instance
+              .collection("farmers")
+              .doc(docData["farmerId"])
+              .get();
+      docData.addEntries({"farmerDetails": farmerSnapshot.data()}.entries);
+      return docData;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+    return {};
+  }
 }
