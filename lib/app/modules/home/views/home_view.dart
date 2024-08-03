@@ -94,15 +94,29 @@ class HomeView extends GetView<HomeController> {
                     SizedBox(
                       height: 24.h(context),
                     ),
-                    CommonProduct(
-                        id: "id",
-                        farmerFirstName: "Noa",
-                        farmerLastName: "Bell",
-                        farmerImage: "https://via.placeholder.com/52x52",
-                        productName: "Bell Peppers",
-                        image: "https://via.placeholder.com/52x52",
-                        price: 3,
-                        quantity: 1)
+                    Wrap(
+                      spacing: 16.w(context),
+                      runSpacing: 16.h(context),
+                      children: [
+                        for (Map product in controller.products)
+                          CommonProduct(
+                            id: product["id"],
+                            farmerFirstName:
+                                product["farmerDetails"]["fName"] ?? "",
+                            farmerLastName:
+                                product["farmerDetails"]["lName"] ?? "",
+                            farmerImage: product["farmerDetails"]
+                                    ["profilePicture"] ??
+                                "",
+                            productName: product["title"] ?? "",
+                            image: product["image"] ?? "",
+                            price: double.parse(
+                                (product["price"] ?? 1).toString()),
+                            quantity: double.parse(
+                                (product["quantity"] ?? 1).toString()),
+                          ),
+                      ],
+                    )
                   ],
                 ),
               ),
