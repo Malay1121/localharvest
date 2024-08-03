@@ -17,7 +17,7 @@ class FarmerInfoController extends GetxController {
     UserCredential? result = await DatabaseHelper.createUser(
         data: userDetails as Map<String, dynamic>);
     if (result != null) {
-      Get.offAllNamed(Routes.HOME);
+      Get.offAllNamed(Routes.FARMER_HOME);
     }
   }
 

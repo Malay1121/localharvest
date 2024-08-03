@@ -10,6 +10,7 @@ abstract class Routes {
   static const SPLASH = _Paths.SPLASH;
   static const PRODUCT = _Paths.PRODUCT;
   static const FARMER_INFO = _Paths.FARMER_INFO;
+  static const FARMER_HOME = _Paths.FARMER_HOME;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const SPLASH = '/splash';
   static const PRODUCT = '/product';
   static const FARMER_INFO = '/farmer-info';
+  static const FARMER_HOME = '/farmer-home';
 }

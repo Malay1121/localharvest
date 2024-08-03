@@ -64,10 +64,14 @@ class DatabaseHelper {
     }
   }
 
-  static Future<List<Map>> getProducts() async {
+  static Future<List<Map>> getProducts({String? farmerId}) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> querySnapshot =
-          await FirebaseFirestore.instance.collection("products").get();
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = farmerId != null
+          ? await FirebaseFirestore.instance
+              .collection("products")
+              .where("farmerId", isEqualTo: farmerId)
+              .get()
+          : await FirebaseFirestore.instance.collection("products").get();
       List<Map> docs = [];
       for (var doc in querySnapshot.docs) {
         Map docData = doc.data();

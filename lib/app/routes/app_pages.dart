@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/farmer_home/bindings/farmer_home_binding.dart';
+import '../modules/farmer_home/views/farmer_home_view.dart';
 import '../modules/farmer_info/bindings/farmer_info_binding.dart';
 import '../modules/farmer_info/views/farmer_info_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.FARMER_INFO,
       page: () => const FarmerInfoView(),
       binding: FarmerInfoBinding(),
+    ),
+    GetPage(
+      name: _Paths.FARMER_HOME,
+      page: () => const FarmerHomeView(),
+      binding: FarmerHomeBinding(),
     ),
   ];
 }

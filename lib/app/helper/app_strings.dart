@@ -41,6 +41,8 @@ class AppStrings {
   static String freeLand = "Free Land(in square feet)";
   static String done = "Done";
 
+  static String noProductsListedYet = "No Products Listed Yet!";
+
   static String search = "Search";
   static String fulfilledBy = "Fulfilled by";
   static String organic = "Organic";
@@ -48,4 +50,6 @@ class AppStrings {
   static String reviews = "Reviews";
   static String lifetimeSales = "Lifetime Sales";
   static String addToCart = "Add To Cart";
+
+  static String newProduct = "New Product";
 }

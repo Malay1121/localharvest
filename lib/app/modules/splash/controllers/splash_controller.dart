@@ -24,7 +24,13 @@ class SplashController extends CommonController {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Get.offAndToNamed(!firstTime ? Routes.HOME : Routes.ONBOARDING);
+        var userData = readUserDetails();
+
+        Get.offAndToNamed(!firstTime
+            ? userData!["userType"] == AppStrings.farmer
+                ? Routes.FARMER_HOME
+                : Routes.HOME
+            : Routes.ONBOARDING);
       },
     );
   }
