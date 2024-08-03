@@ -4,7 +4,7 @@ import 'all_imports.dart';
 import 'package:intl/intl.dart';
 
 GetStorage getStorage = GetStorage();
-
+FirebaseStorage storage = FirebaseStorage.instance;
 Map apiKeys = {
   "gemini": "AIzaSyBp73DKyzF2KwK2yPNc5lYzO_hkdcgJxyk",
 };

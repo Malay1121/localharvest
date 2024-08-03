@@ -10,7 +10,10 @@ class AppStrings {
 
   static String emailValidation = "Please enter a valid email";
   static String phoneValidation = "Please enter a valid phone number";
-  static String nameValidation = "Please enter a valid name";
+  static String lastNameValidation = "Please enter a valid first name";
+  static String firstNameValidation = "Please enter a valid last name";
+  static String profilePictureValidation =
+      "Please select a valid profile picture";
   static String passwordValidation = "Please enter a valid password";
   static String passwordErrorMessage =
       "Minimum 8 characters, at least 1 lower case, at least 1 upper case, at least 1 digit";
@@ -27,6 +30,10 @@ class AppStrings {
   static String alreadyHaveAnAccount = "Already have an account?";
   static String consumer = "Consumer";
   static String farmer = "Farmer";
+  static String profilePicture = "Profile Picture";
+  static String pickSource = "Pick Source";
+  static String camera = "Camera";
+  static String gallery = "Gallery";
 
   static String search = "Search";
 }

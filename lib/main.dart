@@ -9,6 +9,8 @@ void main() async {
           appId: "1:997946243567:android:4a08571efe1f70ca915e1a",
           messagingSenderId: "997946243567",
           projectId: "localharvest-app"));
+  storage =
+      FirebaseStorage.instanceFor(bucket: "gs://localharvest-app.appspot.com");
   initializeSize(390, 844);
   initializeSpeech();
   configureEasyLoading();

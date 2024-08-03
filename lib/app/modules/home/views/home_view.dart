@@ -40,7 +40,7 @@ class HomeView extends GetView<HomeController> {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               image: NetworkImage(
-                                "https://via.placeholder.com/52x52",
+                                controller.userDetails["profilePicture"],
                               ),
                               fit: BoxFit.fill,
                             ),
@@ -94,97 +94,15 @@ class HomeView extends GetView<HomeController> {
                     SizedBox(
                       height: 24.h(context),
                     ),
-                    Container(
-                      width: 163.w(context),
-                      decoration: BoxDecoration(
-                        color: AppColors.lightBG,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.w(context),
-                          vertical: 24.h(context),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 20.w(context),
-                                  height: 20.h(context),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        "https://via.placeholder.com/52x52",
-                                      ),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 4.w(context),
-                                ),
-                                AppText(
-                                  text: "Noa Bell",
-                                  style: Styles.bold(
-                                    color: AppColors.fontGrey,
-                                    fontSize: 12.t(context),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 4.h(context),
-                            ),
-                            Container(
-                              width: 115.w(context),
-                              height: 115.h(context),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    "https://via.placeholder.com/115x115",
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 8.h(context)),
-                            AppText(
-                              text: "Noa’s Bell Peppers",
-                              style: Styles.bold(
-                                color: AppColors.fontDark,
-                                fontSize: 14.t(context),
-                              ),
-                            ),
-                            SizedBox(height: 2.h(context)),
-                            AppText(
-                              text: "1 kg, 3\$",
-                              style: Styles.bold(
-                                color: AppColors.secondary,
-                                fontSize: 14.t(context),
-                              ),
-                            ),
-                            Container(
-                              width: 36.w(context),
-                              height: 36.h(context),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.primary,
-                              ),
-                              child: SvgPicture.asset(
-                                AppImages.icAdd,
-                                width: 16.w(context),
-                                height: 16.h(context),
-                                color: AppColors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    CommonProduct(
+                        id: "id",
+                        farmerFirstName: "Noa",
+                        farmerLastName: "Bell",
+                        farmerImage: "https://via.placeholder.com/52x52",
+                        productName: "Bell Peppers",
+                        image: "https://via.placeholder.com/52x52",
+                        price: 3,
+                        quantity: 1)
                   ],
                 ),
               ),

@@ -34,3 +34,4 @@ export 'package:local_harvest/app/widgets/common_button.dart';
 export 'package:local_harvest/app/widgets/common_controller.dart';
 export 'package:local_harvest/app/widgets/common_text.dart';
 export 'package:local_harvest/app/widgets/common_textfield.dart';
+export 'package:local_harvest/app/widgets/common_product.dart';

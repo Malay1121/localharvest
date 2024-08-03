@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:local_harvest/app/helper/all_imports.dart';
 
 class SignupController extends GetxController {
@@ -10,6 +8,7 @@ class SignupController extends GetxController {
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  File? profilePicture;
 
   List userTypes = [
     AppStrings.consumer,
@@ -21,8 +20,21 @@ class SignupController extends GetxController {
     update();
   }
 
+  List<Map> imageSources = [
+    {
+      "icon": Icons.camera_alt,
+      "title": AppStrings.camera,
+      "source": ImageSource.camera
+    },
+    {
+      "icon": Icons.upload,
+      "title": AppStrings.gallery,
+      "source": ImageSource.gallery
+    },
+  ];
+
   void signUp() async {
-    if (validation()) {
+    if (await validation()) {
       EasyLoading.show();
       Map<String, dynamic> userDetails = {
         "fName": firstNameController.text,
@@ -31,6 +43,7 @@ class SignupController extends GetxController {
         "phone": phoneController.text,
         "password": generateMd5(passwordController.text),
         "userType": selectedUserType,
+        "profilePicture": profilePicture,
       };
       UserCredential? result =
           await DatabaseHelper.createUser(data: userDetails);
@@ -39,6 +52,92 @@ class SignupController extends GetxController {
       }
     }
     EasyLoading.dismiss();
+  }
+
+  void selectImage(ImageSource source) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: source);
+    profilePicture = image != null ? File(image.path) : null;
+    update();
+  }
+
+  void pickProfilePicture() {
+    Get.bottomSheet(
+      Container(
+        height: 280.h(Get.context!),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 24.w(Get.context!),
+            vertical: 24.h(Get.context!),
+          ),
+          child: Column(
+            children: [
+              AppText(
+                text: AppStrings.pickSource,
+                style: Styles.bold(
+                  color: AppColors.fontDark,
+                  fontSize: 24.t(Get.context!),
+                ),
+                centered: true,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 24.h(Get.context!),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  for (Map source in imageSources)
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                        selectImage(source["source"]);
+                      },
+                      child: Container(
+                        width: 166.w(Get.context!),
+                        height: 140.h(Get.context!),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: AppColors.primary,
+                            width: 2,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              source["icon"],
+                              color: AppColors.primary,
+                              size: 35.t(Get.context!),
+                            ),
+                            AppText(
+                              text: source["title"],
+                              style: Styles.medium(
+                                color: AppColors.primary,
+                                fontSize: 20.t(Get.context!),
+                              ),
+                              centered: true,
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -56,12 +155,16 @@ class SignupController extends GetxController {
     super.onClose();
   }
 
-  bool validation() {
+  Future<bool> validation() async {
+    if (profilePicture == null || !(await profilePicture!.exists())) {
+      showSnackbar(message: AppStrings.profilePictureValidation);
+      return false;
+    }
     if (firstNameController.text.isEmpty) {
-      showSnackbar(message: AppStrings.nameValidation);
+      showSnackbar(message: AppStrings.firstNameValidation);
       return false;
     } else if (lastNameController.text.isEmpty) {
-      showSnackbar(message: AppStrings.nameValidation);
+      showSnackbar(message: AppStrings.lastNameValidation);
       return false;
     } else if (emailAddressController.text.isEmpty ||
         !validateEmail(emailAddressController.text)) {

@@ -1,11 +1,36 @@
 import 'all_imports.dart';
 
 class DatabaseHelper {
+  static Future getApis() async {
+    try {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection("api_key")
+          .doc("api_key")
+          .get();
+      apiKeys = documentSnapshot.data() as Map;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+  }
+
+  static Future uploadFile({required String path, required File file}) async {
+    Reference reference = storage.ref().child(path);
+    await reference.putFile(file);
+    String location = await reference.getDownloadURL();
+    return location;
+  }
+
   static Future createUser({required Map<String, dynamic> data}) async {
     try {
       UserCredential user = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: data["email"], password: data["password"]);
+      String type = (data["profilePicture"] as File).path.split(".").last;
+      String profilePicture = await uploadFile(
+          path:
+              "${data["userType"] == AppStrings.farmer ? "farmers" : "consumers"}/${user.user!.uid}.${type}",
+          file: data["profilePicture"]);
+      data["profilePicture"] = profilePicture;
 
       data.addEntries({"uid": user.user!.uid}.entries);
       await FirebaseFirestore.instance
@@ -14,7 +39,7 @@ class DatabaseHelper {
           .doc(data["uid"])
           .set(data);
       writeUserDetails(data);
-      return user.user;
+      return user;
     } on FirebaseException catch (error) {
       showFirebaseError(error.message);
     }
