@@ -8,6 +8,8 @@ class AppImages {
   static String icLock = "${svgsDirectory}ic_lock.svg";
   static String icEmail = "${svgsDirectory}ic_email.svg";
   static String icPhone = "${svgsDirectory}ic_phone.svg";
+  static String icAdd = "${svgsDirectory}ic_add.svg";
+  static String icSearch = "${svgsDirectory}ic_search.svg";
 
   static String logo = "assets/images/logo.png";
   static String transparentLogo = "assets/images/transparent_logo.png";

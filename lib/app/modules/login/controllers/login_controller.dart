@@ -22,7 +22,11 @@ class LoginController extends GetxController {
         "password": generateMd5(passwordController.text),
         "userType": selectedUserType,
       };
-      await DatabaseHelper.loginUser(data: userDetails);
+      UserCredential? result =
+          await DatabaseHelper.loginUser(data: userDetails);
+      if (result != null) {
+        Get.offAllNamed(Routes.HOME);
+      }
       EasyLoading.dismiss();
     }
   }

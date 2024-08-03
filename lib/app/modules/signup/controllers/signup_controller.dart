@@ -32,7 +32,11 @@ class SignupController extends GetxController {
         "password": generateMd5(passwordController.text),
         "userType": selectedUserType,
       };
-      await DatabaseHelper.createUser(data: userDetails);
+      UserCredential? result =
+          await DatabaseHelper.createUser(data: userDetails);
+      if (result != null) {
+        Get.offAllNamed(Routes.HOME);
+      }
     }
     EasyLoading.dismiss();
   }

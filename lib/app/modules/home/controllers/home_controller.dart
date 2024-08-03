@@ -1,13 +1,14 @@
 import 'package:get/get.dart';
+import 'package:local_harvest/app/helper/all_imports.dart';
 import 'package:local_harvest/app/widgets/common_controller.dart';
 
 class HomeController extends CommonController {
-  //TODO: Implement HomeController
+  Map<String, dynamic> userDetails = {};
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    userDetails = readUserDetails() ?? {};
   }
 
   @override
@@ -19,6 +20,4 @@ class HomeController extends CommonController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

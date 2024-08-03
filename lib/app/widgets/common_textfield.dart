@@ -85,7 +85,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
             child: Icon(
               listening ? Icons.stop : Icons.mic,
               color: AppColors.primary,
-              size: 24.t(context),
+              size: 16.t(context),
             ),
           ),
           hintStyle: Styles.medium(
@@ -94,28 +94,22 @@ class _CommonTextFieldState extends State<CommonTextField> {
           prefixIconConstraints: widget.prefixIconConstraints,
           prefixIcon: widget.prefixIcon,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: AppColors.stroke,
-              width: 1,
-            ),
+            borderRadius: BorderRadius.circular(67),
+            borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              color: AppColors.stroke,
-              width: 1,
-            ),
+            borderRadius: BorderRadius.circular(67),
+            borderSide: BorderSide.none,
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(67),
             borderSide: BorderSide(
               color: AppColors.stroke,
               width: 1,
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(67),
             borderSide: BorderSide(
               color: AppColors.stroke,
               width: 1,

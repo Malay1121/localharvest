@@ -49,9 +49,27 @@ bool isEmptyString(String? string) {
 void configureEasyLoading() {
   EasyLoading.instance
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..indicatorColor = AppColors.primary
     ..loadingStyle = EasyLoadingStyle.dark
     ..userInteractions = false
     ..dismissOnTap = false;
+}
+
+String greet() {
+  DateTime now = DateTime.now();
+  int hours = now.hour;
+  String greeting = "";
+
+  if (hours >= 1 && hours <= 12) {
+    greeting = "Good Morning";
+  } else if (hours >= 12 && hours <= 16) {
+    greeting = "Good Afternoon";
+  } else if (hours >= 16 && hours <= 21) {
+    greeting = "Good Evening";
+  } else if (hours >= 21 && hours <= 24) {
+    greeting = "Good Night";
+  }
+  return greeting;
 }
 
 String formatDate(DateTime date) {

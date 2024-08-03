@@ -27,4 +27,6 @@ class AppStrings {
   static String alreadyHaveAnAccount = "Already have an account?";
   static String consumer = "Consumer";
   static String farmer = "Farmer";
+
+  static String search = "Search";
 }
