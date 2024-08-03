@@ -50,11 +50,8 @@ class LoginController extends GetxController {
     if (emailController.text.isEmpty || !validateEmail(emailController.text)) {
       showSnackbar(message: AppStrings.emailValidation);
       return false;
-    } else if (passwordController.text.isEmpty ||
-        !validatePassword(passwordController.text)) {
-      showSnackbar(
-          title: AppStrings.passwordValidation,
-          message: AppStrings.passwordErrorMessage);
+    } else if (passwordController.text.isEmpty) {
+      showSnackbar(title: AppStrings.passwordValidation);
       return false;
     }
     return true;

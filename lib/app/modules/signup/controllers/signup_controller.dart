@@ -36,6 +36,7 @@ class SignupController extends GetxController {
   void signUp() async {
     if (await validation()) {
       EasyLoading.show();
+
       Map<String, dynamic> userDetails = {
         "fName": firstNameController.text,
         "lName": lastNameController.text,
@@ -45,10 +46,14 @@ class SignupController extends GetxController {
         "userType": selectedUserType,
         "profilePicture": profilePicture,
       };
-      UserCredential? result =
-          await DatabaseHelper.createUser(data: userDetails);
-      if (result != null) {
-        Get.offAllNamed(Routes.HOME);
+      if (selectedUserType == AppStrings.farmer) {
+        Get.toNamed(Routes.FARMER_INFO, arguments: userDetails);
+      } else {
+        UserCredential? result =
+            await DatabaseHelper.createUser(data: userDetails);
+        if (result != null) {
+          Get.offAllNamed(Routes.HOME);
+        }
       }
     }
     EasyLoading.dismiss();

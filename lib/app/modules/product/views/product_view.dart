@@ -37,20 +37,23 @@ class ProductView extends GetView<ProductController> {
                       Positioned(
                         top: 24.h(context),
                         left: 24.w(context),
-                        child: Container(
-                          width: 44.w(context),
-                          height: 44.h(context),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.white,
-                            border: Border.all(
-                              color: Color(0xFFF1F1F5),
+                        child: GestureDetector(
+                          onTap: () => Get.back(),
+                          child: Container(
+                            width: 44.w(context),
+                            height: 44.h(context),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: AppColors.white,
+                              border: Border.all(
+                                color: Color(0xFFF1F1F5),
+                              ),
                             ),
-                          ),
-                          child: Icon(
-                            Icons.arrow_back_ios_rounded,
-                            color: AppColors.fontDark,
-                            size: 15.t(context),
+                            child: Icon(
+                              Icons.arrow_back_ios_rounded,
+                              color: AppColors.fontDark,
+                              size: 15.t(context),
+                            ),
                           ),
                         ),
                       ),
@@ -182,7 +185,39 @@ class ProductView extends GetView<ProductController> {
                           height: 12.h(context),
                         ),
                         Wrap(
-                          children: [],
+                          spacing: 16.w(context),
+                          runSpacing: 16.h(context),
+                          children: [
+                            controller.statCard(
+                              title: "100%",
+                              description: AppStrings.organic,
+                              icon: AppImages.icOrganic,
+                            ),
+                            controller.statCard(
+                              title: "15 Years",
+                              description: AppStrings.farmingExp,
+                              icon: AppImages.icExperience,
+                            ),
+                            controller.statCard(
+                              title: "4.8",
+                              description: AppStrings.reviews,
+                              icon: AppImages.icStar,
+                            ),
+                            controller.statCard(
+                              title: "2300kg",
+                              description: AppStrings.lifetimeSales,
+                              icon: AppImages.icSales,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 24.h(context),
+                        ),
+                        CommonButton(
+                          text: AppStrings.addToCart,
+                          onTap: () => null,
+                          height: 50,
+                          width: 342,
                         ),
                       ],
                     ),

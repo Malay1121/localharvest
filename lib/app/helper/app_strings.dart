@@ -8,6 +8,7 @@ class AppStrings {
       supportYourLocalFarmersCutOutTheMiddleManGettingTheFarmerYourselfABetterDeal =
       "Support your local farmers & cut out the middle man, getting the farmer & yourself a better deal!";
 
+  static String commonValidation = "Please fill all the details";
   static String emailValidation = "Please enter a valid email";
   static String phoneValidation = "Please enter a valid phone number";
   static String lastNameValidation = "Please enter a valid first name";
@@ -35,10 +36,16 @@ class AppStrings {
   static String camera = "Camera";
   static String gallery = "Gallery";
 
+  static String fewMoreDetails = "Few More Details";
+  static String experience = "Experience(in years)";
+  static String freeLand = "Free Land(in square feet)";
+  static String done = "Done";
+
   static String search = "Search";
   static String fulfilledBy = "Fulfilled by";
   static String organic = "Organic";
   static String farmingExp = "Farming Exp.";
   static String reviews = "Reviews";
   static String lifetimeSales = "Lifetime Sales";
+  static String addToCart = "Add To Cart";
 }

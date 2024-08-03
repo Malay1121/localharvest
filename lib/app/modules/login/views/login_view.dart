@@ -11,7 +11,7 @@ class LoginView extends GetView<LoginController> {
       init: LoginController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.lightBG,
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -69,7 +69,7 @@ class LoginView extends GetView<LoginController> {
                                 decoration: BoxDecoration(
                                   color: userType == controller.selectedUserType
                                       ? AppColors.primary
-                                      : AppColors.white,
+                                      : AppColors.lightBG,
                                   borderRadius: BorderRadius.circular(67),
                                 ),
                                 child: Center(

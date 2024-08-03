@@ -11,10 +11,10 @@ class AppImages {
   static String icAdd = "${svgsDirectory}ic_add.svg";
   static String icSearch = "${svgsDirectory}ic_search.svg";
 
-  static String icExperience = "${imagesDirectory}ic_experience.svg";
-  static String icOrganic = "${imagesDirectory}ic_organic.svg";
-  static String icSales = "${imagesDirectory}ic_sales.svg";
-  static String icStar = "${imagesDirectory}ic_star.svg";
+  static String icExperience = "${imagesDirectory}ic_experience.png";
+  static String icOrganic = "${imagesDirectory}ic_organic.png";
+  static String icSales = "${imagesDirectory}ic_sales.png";
+  static String icStar = "${imagesDirectory}ic_star.png";
 
   static String logo = "assets/images/logo.png";
   static String transparentLogo = "assets/images/transparent_logo.png";
