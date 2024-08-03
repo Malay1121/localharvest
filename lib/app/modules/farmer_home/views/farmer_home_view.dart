@@ -20,6 +20,7 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                     horizontal: 24.w(context),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [

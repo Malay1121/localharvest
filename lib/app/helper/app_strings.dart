@@ -31,6 +31,7 @@ class AppStrings {
   static String alreadyHaveAnAccount = "Already have an account?";
   static String consumer = "Consumer";
   static String farmer = "Farmer";
+  static String farmers = "Farmers";
   static String profilePicture = "Profile Picture";
   static String pickSource = "Pick Source";
   static String camera = "Camera";
@@ -52,6 +53,7 @@ class AppStrings {
   static String addToCart = "Add To Cart";
 
   static String newProduct = "New Product";
+  static String products = "Products";
   static String addProduct = "Add Product";
   static String productImage = "Product Image";
   static String productName = "Product Name";

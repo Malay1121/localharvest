@@ -90,6 +90,22 @@ class DatabaseHelper {
     return [];
   }
 
+  static Future<List<Map>> getFarmers() async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance.collection("farmers").get();
+      List<Map> docs = [];
+      for (var doc in querySnapshot.docs) {
+        Map docData = doc.data();
+        docs.add(docData);
+      }
+      return docs;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+    return [];
+  }
+
   static Future<Map> getProduct({required String id}) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> querySnapshot =

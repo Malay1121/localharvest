@@ -16,6 +16,7 @@ class CommonTextField extends StatefulWidget {
     this.textInputAction,
     this.maxLines = 1,
     this.prefixIconConstraints,
+    this.onChanged,
   });
   String hintText;
   double? width;
@@ -27,6 +28,7 @@ class CommonTextField extends StatefulWidget {
   TextInputAction? textInputAction;
   int? maxLines;
   BoxConstraints? prefixIconConstraints;
+  Function(String)? onChanged;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
@@ -74,6 +76,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         obscureText: widget.obscureText,
         keyboardType: widget.keyboardType,
         maxLines: widget.maxLines,
+        onChanged: widget.onChanged,
         textInputAction: widget.textInputAction,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.zero,

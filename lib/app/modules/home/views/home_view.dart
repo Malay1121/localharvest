@@ -15,14 +15,14 @@ class HomeView extends GetView<HomeController> {
               body: Stack(
                 children: [
                   Container(
-                    height: 262.h(context),
+                    height: 230.h(context),
                     width: 844.w(context),
                     decoration: BoxDecoration(
                       color: AppColors.lightBG,
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(180),
-                        bottomRight: Radius.circular(180),
-                      ),
+                          // bottomLeft: Radius.circular(180),
+                          // bottomRight: Radius.circular(180),
+                          ),
                     ),
                   ),
                   SingleChildScrollView(
@@ -33,6 +33,7 @@ class HomeView extends GetView<HomeController> {
                         horizontal: 24.w(context),
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
@@ -80,6 +81,7 @@ class HomeView extends GetView<HomeController> {
                             height: 24.h(context),
                           ),
                           CommonTextField(
+                            controller: controller.searchController,
                             hintText: AppStrings.search,
                             prefixIcon: Center(
                               child: SvgPicture.asset(
@@ -93,32 +95,89 @@ class HomeView extends GetView<HomeController> {
                               maxWidth: 32.w(context),
                               maxHeight: 13.5.h(context),
                             ),
+                            onChanged: (p0) => controller.onChange(p0),
                           ),
                           SizedBox(
-                            height: 24.h(context),
+                            height: 28.h(context),
+                          ),
+                          Container(
+                            width: 342.w(context),
+                            height: 50.h(context),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.primary,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(67),
+                            ),
+                            child: Row(
+                              children: [
+                                for (String userType in controller.categories)
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () =>
+                                          controller.changeUserType(userType),
+                                      child: Container(
+                                        // width: 171.w(context),
+                                        height: 50.h(context),
+                                        decoration: BoxDecoration(
+                                          color: userType ==
+                                                  controller.selectedCategory
+                                              ? AppColors.primary
+                                              : AppColors.lightBG,
+                                          borderRadius:
+                                              BorderRadius.circular(67),
+                                        ),
+                                        child: Center(
+                                          child: AppText(
+                                            text: userType,
+                                            style: Styles.medium(
+                                              color: userType ==
+                                                      controller
+                                                          .selectedCategory
+                                                  ? AppColors.lightBG
+                                                  : AppColors.primary,
+                                              fontSize: 18.t(context),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 28.h(context),
                           ),
                           Wrap(
                             spacing: 16.w(context),
                             runSpacing: 16.h(context),
                             children: [
-                              for (Map product in controller.products)
-                                CommonProduct(
-                                  id: product["id"],
-                                  farmerFirstName:
-                                      product["farmerDetails"]["fName"] ?? "",
-                                  farmerLastName:
-                                      product["farmerDetails"]["lName"] ?? "",
-                                  farmerImage: product["farmerDetails"]
-                                          ["profilePicture"] ??
-                                      "",
-                                  productName: product["title"] ?? "",
-                                  image: product["image"] ?? "",
-                                  price: double.parse(
-                                      (product["price"] ?? 1).toString()),
-                                  quantity: double.parse(
-                                      (product["quantity"] ?? 1).toString()),
-                                  data: product,
-                                ),
+                              for (Map product in controller.filteredData)
+                                controller.selectedCategory ==
+                                        AppStrings.products
+                                    ? CommonProduct(
+                                        id: product["id"],
+                                        farmerFirstName:
+                                            product["farmerDetails"]["fName"] ??
+                                                "",
+                                        farmerLastName: product["farmerDetails"]
+                                                ["lName"] ??
+                                            "",
+                                        farmerImage: product["farmerDetails"]
+                                                ["profilePicture"] ??
+                                            "",
+                                        productName: product["title"] ?? "",
+                                        image: product["image"] ?? "",
+                                        price: double.parse(
+                                            (product["price"] ?? 1).toString()),
+                                        quantity: double.parse(
+                                            (product["quantity"] ?? 1)
+                                                .toString()),
+                                        data: product,
+                                      )
+                                    : AppText(text: product.toString()),
                             ],
                           )
                         ],
