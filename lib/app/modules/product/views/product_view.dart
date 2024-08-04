@@ -77,24 +77,30 @@ class ProductView extends GetView<ProductController> {
                               ),
                             ),
                             Spacer(),
-                            Container(
-                              width: 36.w(context),
-                              height: 36.h(context),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.lightBG,
-                              ),
-                              child: Icon(
-                                Icons.remove,
-                                color: AppColors.lightGrey,
-                                size: 24.t(context),
+                            GestureDetector(
+                              onTap: () {
+                                controller.quantity--;
+                                controller.update();
+                              },
+                              child: Container(
+                                width: 36.w(context),
+                                height: 36.h(context),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.lightBG,
+                                ),
+                                child: Icon(
+                                  Icons.remove,
+                                  color: AppColors.lightGrey,
+                                  size: 24.t(context),
+                                ),
                               ),
                             ),
                             SizedBox(
                               width: 16.w(context),
                             ),
                             AppText(
-                              text: "3",
+                              text: controller.quantity.toString(),
                               style: Styles.bold(
                                 color: AppColors.fontDark,
                                 fontSize: 18.t(context),
@@ -103,17 +109,23 @@ class ProductView extends GetView<ProductController> {
                             SizedBox(
                               width: 16.w(context),
                             ),
-                            Container(
-                              width: 36.w(context),
-                              height: 36.h(context),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.primary,
-                              ),
-                              child: Icon(
-                                Icons.add,
-                                color: AppColors.white,
-                                size: 24.t(context),
+                            GestureDetector(
+                              onTap: () {
+                                controller.quantity++;
+                                controller.update();
+                              },
+                              child: Container(
+                                width: 36.w(context),
+                                height: 36.h(context),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.primary,
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: AppColors.white,
+                                  size: 24.t(context),
+                                ),
                               ),
                             ),
                           ],
@@ -215,7 +227,7 @@ class ProductView extends GetView<ProductController> {
                         ),
                         CommonButton(
                           text: AppStrings.addToCart,
-                          onTap: () => null,
+                          onTap: () => controller.addToCart(),
                           height: 50,
                           width: 342,
                         ),

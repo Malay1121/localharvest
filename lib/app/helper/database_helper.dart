@@ -144,4 +144,76 @@ class DatabaseHelper {
       showFirebaseError(error.message);
     }
   }
+
+  static Future<List<Map>> getCart({required String uid}) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance
+              .collection("consumers")
+              .doc(uid)
+              .collection("cart")
+              .get();
+      List<Map> docs = [];
+      for (var doc in querySnapshot.docs) {
+        Map docData = doc.data();
+
+        Map productDetails = await getProduct(id: docData["id"]);
+        docData.addEntries({"productDetails": productDetails}.entries);
+        docs.add(docData);
+      }
+      return docs;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+    return [];
+  }
+
+  static Future addToCart(
+      {required String uid,
+      required String productId,
+      required int quantity}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("consumers")
+          .doc(uid)
+          .collection("cart")
+          .doc(productId)
+          .set({"id": productId, "quantity": quantity});
+
+      return true;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+    return [];
+  }
+
+  static Future checkout(
+      {required String uid, required List<Map> products}) async {
+    try {
+      for (Map product in products) {
+        await FirebaseFirestore.instance
+            .collection("consumers")
+            .doc(uid)
+            .collection("cart")
+            .doc(product["id"])
+            .delete();
+        await FirebaseFirestore.instance
+            .collection("farmers")
+            .doc(product["productDetails"]["farmerDetails"]["uid"])
+            .collection("orders")
+            .doc(product["id"] + uid)
+            .set({
+          "productId": product["id"],
+          "id": product["id"] + uid,
+          "consumerId": uid,
+          "quantity": product["quantity"],
+        });
+      }
+
+      return true;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+    return [];
+  }
 }

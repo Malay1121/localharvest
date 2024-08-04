@@ -11,6 +11,7 @@ class CommonProduct extends StatefulWidget {
     required this.image,
     required this.price,
     required this.quantity,
+    required this.uid,
     this.data,
     this.edit = false,
   });
@@ -19,6 +20,7 @@ class CommonProduct extends StatefulWidget {
   String productName;
   String farmerFirstName;
   String farmerLastName;
+  String uid;
   double price;
   double quantity;
   String farmerImage;
@@ -117,23 +119,34 @@ class _CommonProductState extends State<CommonProduct> {
                     width: 75.w(context),
                   ),
                   Spacer(),
-                  Container(
-                    width: 36.w(context),
-                    height: 36.h(context),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primary,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.w(context),
-                        vertical: 10.h(context),
+                  GestureDetector(
+                    onTap: () async {
+                      if (widget.edit) {
+                      } else {
+                        await DatabaseHelper.addToCart(
+                            uid: widget.uid, productId: widget.id, quantity: 1);
+                        showSnackbar(
+                            title: "Added ${widget.productName} to cart");
+                      }
+                    },
+                    child: Container(
+                      width: 36.w(context),
+                      height: 36.h(context),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.primary,
                       ),
-                      child: SvgPicture.asset(
-                        widget.edit ? AppImages.icEdit : AppImages.icAdd,
-                        width: 16.w(context),
-                        height: 16.h(context),
-                        color: AppColors.white,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w(context),
+                          vertical: 10.h(context),
+                        ),
+                        child: SvgPicture.asset(
+                          widget.edit ? AppImages.icEdit : AppImages.icAdd,
+                          width: 16.w(context),
+                          height: 16.h(context),
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ),

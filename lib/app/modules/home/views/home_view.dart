@@ -1,4 +1,5 @@
 import 'package:local_harvest/app/helper/all_imports.dart';
+import 'package:local_harvest/app/widgets/common_farmer.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -75,6 +76,26 @@ class HomeView extends GetView<HomeController> {
                                   ),
                                 ],
                               ),
+                              Spacer(),
+                              GestureDetector(
+                                onTap: () => Get.toNamed(Routes.CART),
+                                child: Container(
+                                  width: 44.w(context),
+                                  height: 44.h(context),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.white,
+                                    border: Border.all(
+                                      color: Color(0xFFF1F1F5),
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    Icons.shopping_cart_outlined,
+                                    color: AppColors.fontDark,
+                                    size: 15.t(context),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                           SizedBox(
@@ -176,8 +197,16 @@ class HomeView extends GetView<HomeController> {
                                             (product["quantity"] ?? 1)
                                                 .toString()),
                                         data: product,
+                                        uid: controller.userDetails["uid"],
                                       )
-                                    : AppText(text: product.toString()),
+                                    : CommonFarmer(
+                                        id: product["uid"],
+                                        firstName: product["fName"],
+                                        lastName: product["lName"],
+                                        image: product["profilePicture"],
+                                        sales: product["sales"],
+                                        data: product,
+                                      ),
                             ],
                           )
                         ],

@@ -2,6 +2,7 @@ import 'package:local_harvest/app/helper/all_imports.dart';
 
 class ProductController extends CommonController {
   Map product = {};
+  int quantity = 0;
 
   void getProductDetails() async {
     if (Get.arguments != null) {
@@ -11,6 +12,17 @@ class ProductController extends CommonController {
       } else {
         product = await DatabaseHelper.getProduct(id: arguments["productId"]);
       }
+    }
+  }
+
+  void addToCart() async {
+    dynamic result = await DatabaseHelper.addToCart(
+      uid: userDetails["uid"],
+      productId: product["id"],
+      quantity: quantity,
+    );
+    if (result != null) {
+      Get.toNamed(Routes.CART);
     }
   }
 

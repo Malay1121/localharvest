@@ -117,6 +117,7 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                         height: 16.h(context),
                       ),
                       CommonTextField(
+                        controller: controller.searchController,
                         hintText: AppStrings.search,
                         prefixIcon: Center(
                           child: SvgPicture.asset(
@@ -164,6 +165,7 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                                         (product["quantity"] ?? 1).toString()),
                                     data: product,
                                     edit: true,
+                                    uid: controller.userDetails["uid"],
                                   ),
                               ],
                             )

@@ -60,4 +60,7 @@ class AppStrings {
   static String productDescription = "Product Description";
   static String productPrice = "Product Price";
   static String productQuantity = "Product Quantity";
+
+  static String cart = "Cart";
+  static String checkout = "Checkout";
 }

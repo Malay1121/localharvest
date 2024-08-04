@@ -96,7 +96,12 @@ Map<String, dynamic>? readUserDetails() {
 }
 
 showSnackbar({String? title, String? message}) {
-  Get.snackbar(title ?? 'medguard', message ?? '');
+  Get.snackbar(
+    title ?? 'medguard',
+    message ?? '',
+    backgroundColor: AppColors.primary,
+    colorText: AppColors.white,
+  );
 }
 
 Future textToSpeech(String text) async {
