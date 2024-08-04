@@ -45,7 +45,7 @@ class AddProductController extends CommonController {
         result = await DatabaseHelper.editProduct(data: productDetails);
       }
       if (result != null) {
-        Get.back();
+        Get.offAndToNamed(Routes.FARMER_HOME);
       }
       EasyLoading.dismiss();
     }

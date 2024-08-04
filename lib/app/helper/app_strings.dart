@@ -48,6 +48,7 @@ class AppStrings {
   static String search = "Search";
   static String fulfilledBy = "Fulfilled by";
   static String organic = "Organic";
+  static String orders = "Orders";
   static String farmingExp = "Farming Exp.";
   static String reviews = "Reviews";
   static String lifetimeSales = "Lifetime Sales";

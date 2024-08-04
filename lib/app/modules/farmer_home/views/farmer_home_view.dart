@@ -74,10 +74,13 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                         spacing: 16.w(context),
                         runSpacing: 16.h(context),
                         children: [
-                          controller.statCard(
-                            title: "100%",
-                            description: AppStrings.organic,
-                            icon: AppImages.icOrganic,
+                          GestureDetector(
+                            onTap: () => Get.toNamed(Routes.ORDERS),
+                            child: controller.statCard(
+                              title: controller.orders.toString(),
+                              description: AppStrings.orders,
+                              icon: AppImages.icOrganic,
+                            ),
                           ),
                           controller.statCard(
                             title:

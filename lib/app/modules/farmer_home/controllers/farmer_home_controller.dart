@@ -8,6 +8,7 @@ class FarmerHomeController extends CommonController {
     AppStrings.products,
     AppStrings.farmers,
   ];
+  int orders = 0;
 
   void getProducts() async {
     filteredData = (products)
@@ -32,6 +33,10 @@ class FarmerHomeController extends CommonController {
 
   onChange(String value) {
     getProducts();
+  }
+
+  void getOrdersCount() async {
+    orders = await DatabaseHelper.getOrdersCount(uid: userDetails["uid"]) ?? 0;
   }
 
   @override
