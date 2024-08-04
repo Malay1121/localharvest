@@ -1,4 +1,4 @@
-#LocalHarvest
+# LocalHarvest
 
 ## Inspiration
 Growing up in India, we know what it's like to be a farmer here & by extension, around the globe. As someone who's relatives are farmers as well, I know what the struggles can be like. Farmers globally work tirelessly day & night to support their families, yet due to the shady tactics of middleman & consumers not being aware, they lose out on the profit. Millions of farmers worldwide are suffering as a result, we knew we had to make a solution.
