@@ -179,8 +179,8 @@ class ProductView extends GetView<ProductController> {
                                   height: 3.h(context),
                                 ),
                                 AppText(
-                                  text:
-                                      "Hello friend! I’m sure you’ll love the awesome taste of my famous ginger!",
+                                  text: controller.product["description"] ??
+                                      "Hello friend! I’m sure you’ll love the awesome taste of my crops!",
                                   style: Styles.bold(
                                     color: AppColors.fontGrey,
                                     fontSize: 14.t(context),
@@ -206,17 +206,20 @@ class ProductView extends GetView<ProductController> {
                               icon: AppImages.icOrganic,
                             ),
                             controller.statCard(
-                              title: "15 Years",
+                              title:
+                                  "${controller.product["farmerDetails"]["experience"]} Years",
                               description: AppStrings.farmingExp,
                               icon: AppImages.icExperience,
                             ),
                             controller.statCard(
-                              title: "4.8",
+                              title:
+                                  "${controller.product["farmerDetails"]["review"]}",
                               description: AppStrings.reviews,
                               icon: AppImages.icStar,
                             ),
                             controller.statCard(
-                              title: "2300kg",
+                              title:
+                                  "${controller.product["farmerDetails"]["sales"]}kg",
                               description: AppStrings.lifetimeSales,
                               icon: AppImages.icSales,
                             ),

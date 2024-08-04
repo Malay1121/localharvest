@@ -145,6 +145,18 @@ class DatabaseHelper {
     }
   }
 
+  static Future editProduct({required Map<String, dynamic> data}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("products")
+          .doc(data["id"])
+          .update(data);
+      return true;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+  }
+
   static Future<List<Map>> getCart({required String uid}) async {
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
@@ -211,6 +223,29 @@ class DatabaseHelper {
       }
 
       return true;
+    } on FirebaseException catch (error) {
+      showFirebaseError(error.message);
+    }
+    return [];
+  }
+
+  static Future<List<Map>> getOrders({required String uid}) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot =
+          await FirebaseFirestore.instance
+              .collection("farmers")
+              .doc(uid)
+              .collection("orders")
+              .get();
+      List<Map> docs = [];
+      for (var doc in querySnapshot.docs) {
+        Map docData = doc.data();
+
+        Map productDetails = await getProduct(id: docData["productId"]);
+        docData.addEntries({"productDetails": productDetails}.entries);
+        docs.add(docData);
+      }
+      return docs;
     } on FirebaseException catch (error) {
       showFirebaseError(error.message);
     }

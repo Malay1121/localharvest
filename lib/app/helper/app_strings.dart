@@ -43,6 +43,7 @@ class AppStrings {
   static String done = "Done";
 
   static String noProductsListedYet = "No Products Listed Yet!";
+  static String listening = "Listening";
 
   static String search = "Search";
   static String fulfilledBy = "Fulfilled by";
@@ -63,4 +64,16 @@ class AppStrings {
 
   static String cart = "Cart";
   static String checkout = "Checkout";
+
+  static String autoFillPrompt = """
+  You have to auto fill details depending on what users say. You will be provided with a JSON in which "text" will contain what user said, "parameters" will contain all the details that you have to fetch from the user's text and return. "parameters" will be a list with JSON with key as the key which the output has to be given, and its value will explain what that key means and what to detect from the text given by the user.
+
+If the user's text doesn't match the context of parameters that the user has asked for, change {"context": false}. Or else give the value and change {"context":true}.
+If a particular parameter has not been talked about in the text, then return null in that particular field.
+
+RETURN JUST THE JSON CODE, NOTHING ELSE. 
+
+Example Input: {"text": "my name is malay patel and my email address is dhara nine two 77 adrate gmail dot com. My phone number is nine four two double nine eight 99 four 0", "parameters": [{"fName": "First name of the user", "lName": "Last name of the user", "email": "email address of the user", "phone": "Phone number of the user"},],} 
+
+Example Output: {"context": true, "data": {"fName":"Malay", "lName":"Patel", "email":"dhara9277@gmail.com", "phone":"9429989940"}}""";
 }

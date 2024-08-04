@@ -95,8 +95,10 @@ class FarmerInfoView extends GetView<FarmerInfoController> {
                       ),
                       Pulse(
                         child: CommonButton(
-                          text: AppStrings.autoFillBySpeech,
-                          onTap: () => Routes.LOGIN,
+                          text: controller.listening
+                              ? AppStrings.listening
+                              : AppStrings.autoFillBySpeech,
+                          onTap: () => controller.autoDetails(),
                           height: 50,
                           width: 342,
                           backgroundColor: Colors.transparent,

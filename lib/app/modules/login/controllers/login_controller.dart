@@ -1,4 +1,5 @@
 import 'package:local_harvest/app/helper/all_imports.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -30,6 +31,60 @@ class LoginController extends GetxController {
             : Routes.HOME);
       }
       EasyLoading.dismiss();
+    }
+  }
+
+  SpeechToText speech = SpeechToText();
+  bool listening = false;
+  void autoDetails() async {
+    String words = "";
+    bool available = await speech.initialize(
+      onStatus: (status) {
+        print(status);
+        if (status == "done" || status == "notListening") {
+          listening = false;
+          update();
+        } else if (status == "listening") {
+          listening = true;
+          update();
+        }
+      },
+      onError: (errorNotification) {},
+    );
+    update();
+    if (available) {
+      speech.listen(
+        listenOptions: SpeechListenOptions(listenMode: ListenMode.dictation),
+        partialResults: false,
+        onResult: (result) async {
+          words = result.recognizedWords;
+          EasyLoading.show();
+          try {
+            Map data = await fetchDetailsAuto(
+              words,
+              [
+                {
+                  "email": "email address of the user",
+                },
+              ],
+            );
+            data = jsonDecode(
+                data["candidates"][0]["content"]["parts"][0]["text"]);
+            print(data);
+            if (data["context"] == true) {
+              emailController.text =
+                  data["data"]["email"] ?? emailController.text;
+              update();
+            }
+          } catch (e) {
+            EasyLoading.dismiss();
+            throw e;
+          }
+          EasyLoading.dismiss();
+        },
+      );
+    } else {
+      print("The user has denied the use of speech recognition.");
     }
   }
 

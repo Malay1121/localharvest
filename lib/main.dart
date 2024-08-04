@@ -12,7 +12,6 @@ void main() async {
   storage =
       FirebaseStorage.instanceFor(bucket: "gs://localharvest-app.appspot.com");
   initializeSize(390, 844);
-  initializeSpeech();
   configureEasyLoading();
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Container(

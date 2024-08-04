@@ -90,7 +90,7 @@ class CartView extends GetView<CartController> {
                                         AppText(
                                           text: product["productDetails"]
                                                   ["farmerDetails"]["fName"] +
-                                              "'s" +
+                                              "'s " +
                                               product["productDetails"]
                                                   ["title"],
                                           style: Styles.bold(

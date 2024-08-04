@@ -1,5 +1,5 @@
 import 'package:speech_to_text/speech_to_text.dart';
-
+import 'package:http/http.dart' as http;
 import 'all_imports.dart';
 import 'package:intl/intl.dart';
 
@@ -206,14 +206,45 @@ run(VoidCallback task) async {
   }
 }
 
-bool listening = false;
-SpeechToText speechToText = SpeechToText();
-bool speechEnabled = false;
-
-void initializeSpeech() async {
-  speechEnabled = await speechToText.initialize(
-    onError: (errorNotification) {
-      listening = false;
+Future<Map<String, dynamic>> fetchDetailsAuto(
+    String text, List parameters) async {
+  String bodyEncoded = json.encode({
+    "system_instruction": {
+      "parts": [
+        {
+          "text": AppStrings.autoFillPrompt,
+        }
+      ]
     },
+    "contents": [
+      {
+        "parts": [
+          {
+            "text": jsonEncode({
+              "text": text,
+              "parameters": parameters,
+            }),
+          }
+        ]
+      }
+    ],
+    "generationConfig": {"response_mime_type": "application/json"}
+  });
+  // print(bodyEncoded);
+  var headers = {'Content-Type': 'application/json'};
+  var request = await http.post(
+    Uri.parse(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKeys["gemini"]}'),
+    headers: headers,
+    body: bodyEncoded,
   );
+
+  if (request.statusCode == 200) {
+    String response = request.body;
+    print(response);
+    return json.decode(response);
+  } else {
+    // print(request.statusCode);
+    return {};
+  }
 }

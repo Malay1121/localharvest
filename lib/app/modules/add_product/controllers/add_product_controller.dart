@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 import '../../../helper/all_imports.dart';
 
@@ -9,6 +10,7 @@ class AddProductController extends CommonController {
   TextEditingController productPriceController = TextEditingController();
   TextEditingController productQuantityController = TextEditingController();
   File? productImage;
+  bool edit = false;
 
   List<Map> imageSources = [
     {
@@ -34,7 +36,14 @@ class AddProductController extends CommonController {
         "image": productImage,
         "farmerId": userDetails["uid"],
       };
-      dynamic result = await DatabaseHelper.createProduct(data: productDetails);
+      dynamic result;
+      if (!edit) {
+        result = await DatabaseHelper.createProduct(data: productDetails);
+      } else {
+        productDetails.addEntries({"id": product["id"]}.entries);
+        productDetails["image"] = product["image"];
+        result = await DatabaseHelper.editProduct(data: productDetails);
+      }
       if (result != null) {
         Get.back();
       }
@@ -42,9 +51,84 @@ class AddProductController extends CommonController {
     }
   }
 
+  SpeechToText speech = SpeechToText();
+  bool listening = false;
+  void autoDetails() async {
+    String words = "";
+    bool available = await speech.initialize(
+      onStatus: (status) {
+        print(status);
+        if (status == "done" || status == "notListening") {
+          listening = false;
+          update();
+        } else if (status == "listening") {
+          listening = true;
+          update();
+        }
+      },
+      onError: (errorNotification) {},
+    );
+    update();
+    if (available) {
+      speech.listen(
+        listenOptions: SpeechListenOptions(listenMode: ListenMode.dictation),
+        partialResults: false,
+        onResult: (result) async {
+          words = result.recognizedWords;
+          EasyLoading.show();
+          try {
+            Map data = await fetchDetailsAuto(
+              words,
+              [
+                {
+                  "price": "Price of the product per quantity",
+                  "quantity": "Quantity of the product",
+                  "title": "Name of the product sold by farmer",
+                  "description": "A small description about the product",
+                },
+              ],
+            );
+            data = jsonDecode(
+                data["candidates"][0]["content"]["parts"][0]["text"]);
+            print(data);
+            if (data["context"] == true) {
+              productNameController.text =
+                  data["data"]["title"] ?? productNameController.text;
+              productPriceController.text =
+                  data["data"]["price"] ?? productPriceController.text;
+              productDescriptionController.text = data["data"]["description"] ??
+                  productDescriptionController.text;
+              productQuantityController.text =
+                  data["data"]["quantity"] ?? productQuantityController.text;
+              update();
+            }
+          } catch (e) {
+            EasyLoading.dismiss();
+            throw e;
+          }
+          EasyLoading.dismiss();
+        },
+      );
+    } else {
+      print("The user has denied the use of speech recognition.");
+    }
+  }
+
+  String existingImage = "";
+  Map product = {};
   @override
   void onInit() {
     super.onInit();
+    if (Get.arguments != null) {
+      Map productDetails = Get.arguments;
+      product = productDetails;
+      productQuantityController.text = productDetails["quantity"].toString();
+      productPriceController.text = productDetails["price"].toString();
+      productNameController.text = productDetails["title"];
+      existingImage = productDetails["image"];
+      edit = true;
+      update();
+    }
   }
 
   @override
@@ -144,7 +228,8 @@ class AddProductController extends CommonController {
   }
 
   Future<bool> validation() async {
-    if (productImage == null || !(await productImage!.exists())) {
+    if (edit == false &&
+        (productImage == null || !(await productImage!.exists()))) {
       showSnackbar(message: AppStrings.profilePictureValidation);
       return false;
     }

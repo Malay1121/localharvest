@@ -28,7 +28,7 @@ class HomeController extends CommonController {
                   : element["title"])
               .toString()
               .toLowerCase()
-              .startsWith(searchController.text.toLowerCase()),
+              .contains(searchController.text.toLowerCase()),
         )
         .toList();
 

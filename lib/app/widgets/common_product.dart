@@ -122,6 +122,7 @@ class _CommonProductState extends State<CommonProduct> {
                   GestureDetector(
                     onTap: () async {
                       if (widget.edit) {
+                        Get.toNamed(Routes.ADD_PRODUCT, arguments: widget.data);
                       } else {
                         await DatabaseHelper.addToCart(
                             uid: widget.uid, productId: widget.id, quantity: 1);

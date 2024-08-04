@@ -29,36 +29,42 @@ class CommonTextField extends StatefulWidget {
   int? maxLines;
   BoxConstraints? prefixIconConstraints;
   Function(String)? onChanged;
+  bool listening = false;
 
   @override
   State<CommonTextField> createState() => _CommonTextFieldState();
 }
 
 class _CommonTextFieldState extends State<CommonTextField> {
-  void speak() {
-    if (!listening) {
-      getText();
-    }
-  }
+  SpeechToText speech = SpeechToText();
+  void speak() async {
+    bool available = await speech.initialize(
+      onStatus: (status) {
+        print(status);
+        if (status == "done" || status == "notListening") {
+          widget.listening = false;
 
-  Future<String> getText() async {
-    String result = "";
-    setState(() {
-      listening = true;
-    });
-
-    SpeechRecognitionResult r = await speechToText.listen(
+          setState(() {});
+        } else if (status == "listening") {
+          widget.listening = true;
+          setState(() {});
+        }
+      },
+      onError: (errorNotification) {},
+    );
+    setState(() {});
+    if (available) {
+      speech.listen(
         listenOptions: SpeechListenOptions(listenMode: ListenMode.dictation),
         partialResults: false,
-        onResult: (res) {
-          setState(() {
-            result = res.recognizedWords;
-            if (widget.controller != null) widget.controller!.text += result;
-            listening = false;
-          });
-        });
-
-    return result;
+        onResult: (result) {
+          if (widget.controller != null)
+            widget.controller!.text += result.recognizedWords;
+        },
+      );
+    } else {
+      print("The user has denied the use of speech recognition.");
+    }
   }
 
   @override
@@ -86,7 +92,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
           suffixIcon: GestureDetector(
             onTap: () => speak(),
             child: Icon(
-              listening ? Icons.stop : Icons.mic,
+              widget.listening ? Icons.stop : Icons.mic,
               color: AppColors.primary,
               size: 16.t(context),
             ),

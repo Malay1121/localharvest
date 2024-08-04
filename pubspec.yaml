@@ -1,7 +1,7 @@
 name: local_harvest
 version: 1.0.0+1
 publish_to: none
-description: A new Flutter project.
+description: Connecting farmers and consumers
 environment: 
   sdk: '>=3.4.3 <4.0.0'
 
@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   flutter_animator: ^3.2.2
   image_picker: ^1.1.2
+  url_launcher: ^6.3.0
 
 dev_dependencies: 
   flutter_lints: 4.0.0

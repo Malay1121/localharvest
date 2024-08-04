@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:local_harvest/app/helper/all_imports.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class SignupController extends GetxController {
   TextEditingController firstNameController = TextEditingController();
@@ -143,6 +144,69 @@ class SignupController extends GetxController {
         ),
       ),
     );
+  }
+
+  SpeechToText speech = SpeechToText();
+  bool listening = false;
+  void autoDetails() async {
+    String words = "";
+    bool available = await speech.initialize(
+      onStatus: (status) {
+        print(status);
+        if (status == "done" || status == "notListening") {
+          listening = false;
+          update();
+        } else if (status == "listening") {
+          listening = true;
+          update();
+        }
+      },
+      onError: (errorNotification) {},
+    );
+    update();
+    if (available) {
+      speech.listen(
+        listenOptions: SpeechListenOptions(listenMode: ListenMode.dictation),
+        partialResults: false,
+        onResult: (result) async {
+          words = result.recognizedWords;
+          EasyLoading.show();
+          try {
+            Map data = await fetchDetailsAuto(
+              words,
+              [
+                {
+                  "fName": "First name of the user",
+                  "lName": "Last name of the user",
+                  "email": "email address of the user",
+                  "phone": "Phone number of the user"
+                },
+              ],
+            );
+            data = jsonDecode(
+                data["candidates"][0]["content"]["parts"][0]["text"]);
+            print(data);
+            if (data["context"] == true) {
+              firstNameController.text =
+                  data["data"]["fName"] ?? firstNameController.text;
+              lastNameController.text =
+                  data["data"]["lName"] ?? lastNameController.text;
+              emailAddressController.text =
+                  data["data"]["email"] ?? emailAddressController.text;
+              phoneController.text =
+                  data["data"]["phone"] ?? phoneController.text;
+              update();
+            }
+          } catch (e) {
+            EasyLoading.dismiss();
+            throw e;
+          }
+          EasyLoading.dismiss();
+        },
+      );
+    } else {
+      print("The user has denied the use of speech recognition.");
+    }
   }
 
   @override

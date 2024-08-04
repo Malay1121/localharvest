@@ -75,29 +75,40 @@ class AddProductView extends GetView<AddProductController> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: AppColors.white,
-                            image: controller.productImage != null
+                            image: controller.edit &&
+                                    controller.existingImage != ""
                                 ? DecorationImage(
-                                    image: FileImage(controller.productImage!),
-                                    fit: BoxFit.cover,
-                                  )
-                                : null,
+                                    image: NetworkImage(
+                                      controller.existingImage,
+                                    ),
+                                    fit: BoxFit.cover)
+                                : controller.productImage != null
+                                    ? DecorationImage(
+                                        image:
+                                            FileImage(controller.productImage!),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null,
                           ),
-                          child: controller.productImage != null
-                              ? Center(
-                                  child: Container(
-                                    width: 40.w(context),
-                                    height: 40.h(context),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppColors.primary,
-                                    ),
-                                    child: Icon(
-                                      Icons.edit,
-                                      color: AppColors.white,
-                                      size: 18.t(context),
-                                    ),
-                                  ),
-                                )
+                          child: controller.edit ||
+                                  controller.productImage != null
+                              ? !controller.edit
+                                  ? Center(
+                                      child: Container(
+                                        width: 40.w(context),
+                                        height: 40.h(context),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColors.primary,
+                                        ),
+                                        child: Icon(
+                                          Icons.edit,
+                                          color: AppColors.white,
+                                          size: 18.t(context),
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox()
                               : Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -217,8 +228,10 @@ class AddProductView extends GetView<AddProductController> {
                       ),
                       Pulse(
                         child: CommonButton(
-                          text: AppStrings.autoFillBySpeech,
-                          onTap: () => Routes.LOGIN,
+                          text: controller.listening
+                              ? AppStrings.listening
+                              : AppStrings.autoFillBySpeech,
+                          onTap: () => controller.autoDetails(),
                           height: 50,
                           width: 342,
                           backgroundColor: Colors.transparent,

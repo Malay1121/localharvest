@@ -148,24 +148,32 @@ class FarmerHomeView extends GetView<FarmerHomeController> {
                               runSpacing: 16.h(context),
                               children: [
                                 for (Map product in controller.products)
-                                  CommonProduct(
-                                    id: product["id"],
-                                    farmerFirstName:
-                                        product["farmerDetails"]["fName"] ?? "",
-                                    farmerLastName:
-                                        product["farmerDetails"]["lName"] ?? "",
-                                    farmerImage: product["farmerDetails"]
-                                            ["profilePicture"] ??
-                                        "",
-                                    productName: product["title"] ?? "",
-                                    image: product["image"] ?? "",
-                                    price: double.parse(
-                                        (product["price"] ?? 1).toString()),
-                                    quantity: double.parse(
-                                        (product["quantity"] ?? 1).toString()),
-                                    data: product,
-                                    edit: true,
-                                    uid: controller.userDetails["uid"],
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      print(product);
+                                    },
+                                    child: CommonProduct(
+                                      id: product["id"],
+                                      farmerFirstName: product["farmerDetails"]
+                                              ["fName"] ??
+                                          "",
+                                      farmerLastName: product["farmerDetails"]
+                                              ["lName"] ??
+                                          "",
+                                      farmerImage: product["farmerDetails"]
+                                              ["profilePicture"] ??
+                                          "",
+                                      productName: product["title"] ?? "",
+                                      image: product["image"] ?? "",
+                                      price: double.parse(
+                                          (product["price"] ?? 1).toString()),
+                                      quantity: double.parse(
+                                          (product["quantity"] ?? 1)
+                                              .toString()),
+                                      data: product,
+                                      edit: true,
+                                      uid: controller.userDetails["uid"],
+                                    ),
                                   ),
                               ],
                             )

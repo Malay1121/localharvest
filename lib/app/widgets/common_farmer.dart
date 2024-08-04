@@ -1,4 +1,5 @@
 import 'package:local_harvest/app/helper/all_imports.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class CommonFarmer extends StatefulWidget {
   CommonFarmer({
@@ -80,22 +81,25 @@ class _CommonFarmerState extends State<CommonFarmer> {
                     width: 75.w(context),
                   ),
                   Spacer(),
-                  Container(
-                    width: 36.w(context),
-                    height: 36.h(context),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.primary,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.w(context),
-                        vertical: 10.h(context),
+                  GestureDetector(
+                    onTap: () async => await launchUrlString("tel://214324234"),
+                    child: Container(
+                      width: 36.w(context),
+                      height: 36.h(context),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.primary,
                       ),
-                      child: Icon(
-                        Icons.call,
-                        size: 16.t(context),
-                        color: AppColors.white,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w(context),
+                          vertical: 10.h(context),
+                        ),
+                        child: Icon(
+                          Icons.call,
+                          size: 16.t(context),
+                          color: AppColors.white,
+                        ),
                       ),
                     ),
                   ),
